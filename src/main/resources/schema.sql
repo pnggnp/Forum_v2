@@ -1,6 +1,5 @@
--- Create the database if it doesn't exist
-CREATE DATABASE IF NOT EXISTS forum_db;
-USE forum_db;
+-- Database Schema for Forum_v1
+-- The database should be created pre-emptively on shared hosting.
 
 -- Users table
 CREATE TABLE IF NOT EXISTS users (

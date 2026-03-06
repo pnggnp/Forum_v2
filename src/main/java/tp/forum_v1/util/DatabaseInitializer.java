@@ -11,7 +11,7 @@ public class DatabaseInitializer {
 
     public static void initialize() {
         System.out.println("Starting Database Initialization...");
-        try (Connection conn = DBConnection.getBaseConnection();
+        try (Connection conn = DBConnection.getConnection();
                 Statement stmt = conn.createStatement()) {
 
             // Read schema normalized to handle different line endings and comments
