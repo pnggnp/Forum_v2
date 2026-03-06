@@ -15,11 +15,8 @@ RUN rm -rf webapps/*
 # Copy the WAR file from the build stage to the webapps folder as ROOT.war
 COPY --from=build /app/target/*.war webapps/ROOT.war
 
-# Render requires the app to listen on a port provided by the environment variable PORT
-# Tomcat default is 8080. We'll use a script to set the port in server.xml if needed,
-# but for most Docker deployments on Render, they handle the port mapping.
-# If Render expects the app to listen on $PORT, we can configure Tomcat's server.xml.
-
+# Render requires the app to listen on the port provided by the $PORT env variable.
+# We use a shell command to dynamically replace port 8080 in server.xml at startup.
 EXPOSE 8080
 
-CMD ["catalina.sh", "run"]
+CMD ["sh", "-c", "sed -i \"s/8080/${PORT:-8080}/g\" /usr/local/tomcat/conf/server.xml && catalina.sh run"]

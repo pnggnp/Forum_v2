@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String DEFAULT_URL_BASE = "jdbc:mysql://localhost:3306/?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useUnicode=yes&characterEncoding=UTF-8";
+    private static final String DEFAULT_URL_BASE = "jdbc:postgresql://localhost:5432/";
     private static final String DEFAULT_DB_NAME = "forum_db";
-    private static final String DEFAULT_USER = "root";
-    private static final String DEFAULT_PASSWORD = "";
+    private static final String DEFAULT_USER = "postgres";
+    private static final String DEFAULT_PASSWORD = "root";
 
     private static final String URL_BASE = getEnvOrDefault("DB_URL_BASE", DEFAULT_URL_BASE);
     private static final String DB_NAME = getEnvOrDefault("DB_NAME", DEFAULT_DB_NAME);
@@ -16,7 +16,7 @@ public class DBConnection {
     private static final String PASSWORD = getEnvOrDefault("DB_PASSWORD", DEFAULT_PASSWORD);
 
     private static final String FULL_URL = System.getenv("DB_URL");
-    private static final String URL = (FULL_URL != null) ? FULL_URL : URL_BASE.replace("3306/", "3306/" + DB_NAME);
+    private static final String URL = (FULL_URL != null) ? FULL_URL : URL_BASE + DB_NAME;
 
     private static String getEnvOrDefault(String key, String defaultValue) {
         String value = System.getenv(key);
@@ -25,7 +25,7 @@ public class DBConnection {
 
     static {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

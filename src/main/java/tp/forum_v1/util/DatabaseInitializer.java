@@ -15,9 +15,9 @@ public class DatabaseInitializer {
                 Statement stmt = conn.createStatement()) {
 
             // Read schema normalized to handle different line endings and comments
-            InputStream is = DatabaseInitializer.class.getResourceAsStream("/schema.sql");
+            InputStream is = DatabaseInitializer.class.getResourceAsStream("/schema_postgres.sql");
             if (is == null) {
-                System.err.println("Could not find schema.sql in resources");
+                System.err.println("Could not find schema_postgres.sql in resources");
                 return;
             }
 
