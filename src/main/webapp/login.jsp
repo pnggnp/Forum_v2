@@ -25,10 +25,11 @@
 
                     <form action="login" method="post">
                         <div class="form-group">
-                            <label for="email">
-                                <fmt:message key="auth.email" />
+                            <label for="identifier">
+                                Email or Username
                             </label>
-                            <input type="email" id="email" name="email" required placeholder="name@company.com">
+                            <input type="text" id="identifier" name="identifier" required
+                                placeholder="name@company.com or username">
                         </div>
                         <div class="form-group">
                             <label for="password">

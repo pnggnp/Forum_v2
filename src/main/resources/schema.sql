@@ -1,6 +1,5 @@
 -- Database Schema for Forum_v1
 -- The database should be created pre-emptively on shared hosting.
-
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -70,10 +69,36 @@ CREATE TABLE IF NOT EXISTS comments (
 );
 
 -- Default Topics
-INSERT IGNORE INTO topics (name, name_fr, description, description_fr) VALUES 
-('General', 'Général', 'General discussion topic', 'Sujet de discussion général'),
-('Music', 'Musique', 'Discuss your favorite music', 'Discutez de votre musique préférée'),
-('Tech', 'Technologie', 'Technology and gadgets', 'Technologie et gadgets');
+INSERT IGNORE INTO topics (name, name_fr, description, description_fr) VALUES
+-- 1ère Année - Semestre 1
+('Mathématique 1', 'Mathématique 1', 'Mathématique 1', 'Mathématique 1'),
+('Algorithmique et Bases de Développement', 'Algorithmique et Bases de Développement', 'Algorithmique et Bases de Développement', 'Algorithmique et Bases de Développement'),
+('Architecture Matérielle', 'Architecture Matérielle', 'Architecture Matérielle', 'Architecture Matérielle'),
+('Système d''Exploitation', 'Système d''Exploitation', 'Système d''Exploitation', 'Système d''Exploitation'),
+('Programmation Python', 'Programmation Python', 'Programmation Python', 'Programmation Python'),
+('Méthodologie de Travail Universitaire', 'Méthodologie de Travail Universitaire', 'Méthodologie de Travail Universitaire', 'Méthodologie de Travail Universitaire'),
+('Langues (Français, Anglais) S1', 'Langues (Français, Anglais) S1', 'Langues (Français, Anglais) S1', 'Langues (Français, Anglais) S1'),
+-- 1ère Année - Semestre 2
+('Réseaux Informatiques', 'Réseaux Informatiques', 'Réseaux Informatiques', 'Réseaux Informatiques'),
+('Bases de Données', 'Bases de Données', 'Bases de Données', 'Bases de Données'),
+('Technologies Web', 'Technologies Web', 'Technologies Web', 'Technologies Web'),
+('Structure de données en C', 'Structure de données en C', 'Structure de données en C', 'Structure de données en C'),
+('Développement Web', 'Développement Web', 'Développement Web', 'Développement Web'),
+('Culture Digitale', 'Culture Digitale', 'Culture Digitale', 'Culture Digitale'),
+('Langues (Français, Anglais) S2', 'Langues (Français, Anglais) S2', 'Langues (Français, Anglais) S2', 'Langues (Français, Anglais) S2'),
+-- 2ème Année - Semestre 3
+('Mathématiques 2', 'Mathématiques 2', 'Mathématiques 2', 'Mathématiques 2'),
+('Programmation Orientée Objet Java', 'Programmation Orientée Objet Java', 'Programmation Orientée Objet Java', 'Programmation Orientée Objet Java'),
+('Ingénierie Logicielle', 'Ingénierie Logicielle', 'Ingénierie Logicielle', 'Ingénierie Logicielle'),
+('Analyse et COO - UML', 'Analyse et COO - UML', 'Analyse et COO - UML', 'Analyse et COO - UML'),
+('Programmation Java Avancée', 'Programmation Java Avancée', 'Programmation Java Avancée', 'Programmation Java Avancée'),
+('Bases de Données Avancées', 'Bases de Données Avancées', 'Bases de Données Avancées', 'Bases de Données Avancées'),
+('Conduite de projet informatique et planification agile', 'Conduite de projet', 'Conduite de projet', 'Conduite de projet'),
+-- 2ème Année - Semestre 4
+('Développement Mobile', 'Développement Mobile', 'Développement Mobile', 'Développement Mobile'),
+('Technologie JEE', 'Technologie JEE', 'Technologie JEE', 'Technologie JEE'),
+('Introduction à l''IA', 'Introduction à l''IA', 'Introduction à l''IA', 'Introduction à l''IA'),
+('Complexité Computationnelle', 'Complexité Computationnelle', 'Complexité Computationnelle', 'Complexité Computationnelle');
 
 -- Default Admin User (password is 'admin123' hashed with BCrypt)
 INSERT IGNORE INTO users (username, email, password, is_active, is_admin) 

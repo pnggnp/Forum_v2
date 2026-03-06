@@ -2,6 +2,7 @@ package tp.forum_v1.controller;
 
 import tp.forum_v1.model.User;
 import tp.forum_v1.util.DBConnection;
+import tp.forum_v1.dao.UserDAO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 @WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
@@ -43,5 +45,43 @@ public class ProfileServlet extends HttpServlet {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            response.sendRedirect("login");
+            return;
+        }
+
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+
+        // Basic validation
+        if (username == null || username.trim().isEmpty() || email == null || email.trim().isEmpty()) {
+            response.sendRedirect("profile?error=Fields cannot be empty");
+            return;
+        }
+
+        // Email validation
+        String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        if (!Pattern.compile(emailRegex).matcher(email).matches()) {
+            response.sendRedirect("profile?error=Invalid email format");
+            return;
+        }
+
+        User user = (User) session.getAttribute("user");
+        user.setUsername(username.trim());
+        user.setEmail(email.trim());
+
+        UserDAO userDAO = new UserDAO();
+        if (userDAO.updateUser(user)) {
+            // Update session user object
+            session.setAttribute("user", user);
+            response.sendRedirect("profile?success=Profile updated successfully");
+        } else {
+            response.sendRedirect("profile?error=Failed to update profile. Email or username might be taken.");
+        }
     }
 }

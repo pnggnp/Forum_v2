@@ -22,10 +22,10 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
+        String identifier = request.getParameter("identifier");
         String password = request.getParameter("password");
 
-        User user = userDAO.login(email, password);
+        User user = userDAO.login(identifier, password);
 
         if (user != null) {
             if (user.isActive()) {
@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
         } else {
-            request.setAttribute("error", "Invalid email or password.");
+            request.setAttribute("error", "Invalid username/email or password.");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
