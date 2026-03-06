@@ -6,7 +6,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Run stage
-FROM tomcat:11.0-jdk21-eclipse-temurin
+FROM tomcat:11.0-jdk21-temurin-jammy
 WORKDIR /usr/local/tomcat
 
 # Remove default webapps
